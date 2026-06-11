@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mp_tictactoe/screens/createroom.dart';
 import 'package:mp_tictactoe/screens/joinroom.dart';
 import 'package:mp_tictactoe/screens/mainmenu.dart';
 import 'package:mp_tictactoe/utils/colors.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
