@@ -12,9 +12,18 @@ class SocketClient {
   static SocketClient? _instance;
 
   SocketClient._internal(){
-    socket = IO.io("http://$ip:3000", <String, dynamic>{
-      'transports': ['websockets'],
+    socket = IO.io("http://127.0.0.1:3000", <String, dynamic>{
+      'transports': ['websocket'],
       'autoConnect': false
+    });
+    socket!.onConnect((_) {
+      print("Socket connected!");
+    });
+    socket!.onDisconnect((_) {
+      print("Socket disconnected!");
+    });
+    socket!.onError((error) {
+      print("Socket error: $error");
     });
     socket!.connect();
   }

@@ -18,8 +18,14 @@ class _CreateroomState extends State<Createroom> {
   final SocketMethods _socketMethods = SocketMethods();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _socketMethods.createRoomSuccess(context);
+  }
+
+  @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _nameController.dispose();
   }

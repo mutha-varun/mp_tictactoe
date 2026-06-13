@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mp_tictactoe/resources/socket_methods.dart';
 import 'package:mp_tictactoe/responsive/respsonsive.dart';
 import 'package:mp_tictactoe/widgets/custombutton.dart';
 import 'package:mp_tictactoe/widgets/customtext.dart';
@@ -16,10 +17,18 @@ class _JoinroomState extends State<Joinroom> {
 
   final _nameController = TextEditingController();
   final _codeController = TextEditingController();
+  final SocketMethods _socketMethods = SocketMethods();
+
+  @override
+  void initState() {
+    super.initState();
+    _socketMethods.joinRoomSuccess(context);
+    _socketMethods.errorOccured(context);
+   _socketMethods.updatePlayersState(context);
+  }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _nameController.dispose();
     _codeController.dispose();
@@ -56,7 +65,7 @@ class _JoinroomState extends State<Joinroom> {
                 text: "Enter room code" 
               ),
               SizedBox(height: size.height*0.045,),
-              Custombutton(onTap: (){}, text: "Join")
+              Custombutton(onTap: ()=> _socketMethods.joinRoom(_nameController.text, _codeController.text), text: "Join")
             ],
           ),
         ),
