@@ -19,7 +19,6 @@ class _BoardState extends State<Board> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _socketMethods.tapped(context);
   }

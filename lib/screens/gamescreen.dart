@@ -22,6 +22,8 @@ class _GamescreenState extends State<Gamescreen> {
     super.initState();
     _socketMethods.updateRoom(context);
     _socketMethods.updatePlayersState(context);
+    _socketMethods.pointIncrease(context);
+    _socketMethods.endGame(context);
   } 
   
   @override
@@ -46,7 +48,5 @@ class _GamescreenState extends State<Gamescreen> {
         )
       ),
     );
-    
-   
   }
 }

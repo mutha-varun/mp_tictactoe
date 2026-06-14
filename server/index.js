@@ -111,6 +111,28 @@ io.on("connection", (socket)=>{
             console.log(e);
         }
     });
+
+    socket.on('winner', async ({winnerSocketId, roomID})=>{
+        try{
+            
+            let room = await Room.findById(roomID);
+            
+            let player = room.players.find((pl)=> pl.socketId == winnerSocketId);
+
+            player.points += 1;
+            room.markModified('players');
+            room = await room.save();
+
+            if(player.points>= room.maxRounds){
+                io.to(roomID).emit('endGame', player);
+            }
+            else{
+                io.to(roomID).emit('pointIncrease',player);
+            }
+        }catch(e){
+            console.log(e);
+        }
+    });
 });
 
 

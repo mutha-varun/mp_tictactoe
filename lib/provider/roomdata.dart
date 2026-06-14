@@ -8,13 +8,13 @@ class Roomdata extends ChangeNotifier{
 
   Player _player1 = Player(
     nickname: '',
-    socketID: '',
+    socketId: '',
     points: 0,
     playerType: 'X'
   );
   Player _player2 = Player(
     nickname: '',
-    socketID: '',
+    socketId: '',
     points: 0,
     playerType: 'O'
   );
@@ -23,6 +23,7 @@ class Roomdata extends ChangeNotifier{
   List<String> get displayElements => _displayElements;   
   Player get player1 => _player1;
   Player get player2 => _player2;
+  int get filledBoxes => _filledBoxes;
 
   void updateRoomData(Map<String, dynamic> data){
     _roomData = data;
@@ -42,6 +43,16 @@ class Roomdata extends ChangeNotifier{
   void updateDisplayElements(int index, String choice){
     _displayElements[index] = choice;
     _filledBoxes +=1;
+    notifyListeners();
+  }
+
+  void resetFilledBoxes(){
+    _filledBoxes = 0;
+  }
+
+  void clearBoard(){
+    _displayElements = ['','','','','','','','',''];
+    _filledBoxes = 0;
     notifyListeners();
   }
 
